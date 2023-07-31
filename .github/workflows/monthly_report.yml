@@ -1,7 +1,30 @@
-name: do-this-monthly
+name: Monthly File Upload
 
 on:
-    schedule:
-        -cron: '**1**'
+  schedule:
+    - cron: '0 0 1 * *' # Schedule to run on the 1st day of every month at 00:00 UTC
 
+jobs:
+  upload_files:
+    name: Upload Monthly Files
+    runs-on: ${{ matrix.os }}
 
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Upload Monthly Files
+        run: |
+          # Replace 'monthly_files' with the path to your files
+          # Replace 'destination_folder' with the path where you want to store the files in the repository
+          cp -r monthly_files destination_folder
+          cd destination_folder
+          git config --local user.email "actions@github.com"
+          git config --local user.name "GitHub Actions"
+          git add .
+          git commit -m "Upload monthly files - $(date +'%Y-%m-%d')"
+          git push

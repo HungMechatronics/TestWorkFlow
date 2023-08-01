@@ -21,7 +21,7 @@ jobs:
         run: |
           # Replace 'monthly_files' with the path to your files
           # Replace 'destination_folder' with the path where you want to store the files in the repository
-          cp -r 'C:\\Users\\Public\\Documents\\03_Python\\Test_github_action' test_folder
+          cp -r 'C:\\Users\\Public\\Documents\\03_Python\\Test_github_action\\gotta_upload_this.txt' test_folder
           cd test_folder
           git config --local user.email "actions@github.com"
           git config --local user.name "GitHub Actions"
